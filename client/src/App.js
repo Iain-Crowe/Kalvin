@@ -4,17 +4,27 @@ import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components/index";
-import { Home, Calendar, Todo } from "./pages/index";
+import { Home, Calendar, Todo, Login } from "./pages/index";
 
 import { useStateContext } from "./contexts/ContextProvider";
 
 import "./App.css";
+import PrivateComponent from "./components/PrivateComponent";
 
 const App = () => {
-    const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
+    const {
+        activeMenu,
+        themeSettings,
+        setThemeSettings,
+        currentColor,
+        currentMode,
+    } = useStateContext();
 
     return (
-        <div className={currentMode === 'Dark' ? 'dark font-display' : 'font-display'}>
+        <div
+            className={
+                currentMode === "Dark" ? "dark font-display" : "font-display"
+            }>
             <BrowserRouter>
                 <div className="flex relative dark:bg-main-dark">
                     <div
@@ -36,7 +46,8 @@ const App = () => {
                         </TooltipComponent>
                     </div>
                     <div
-                        className={`dark:bg-main-dark bg-main min-h-screen w-full ${''
+                        className={`dark:bg-main-dark bg-main min-h-screen w-full ${
+                            ""
                             /*activeMenu ? "md:ml-72" : "flex-2"*/
                         }`}>
                         <div className="fixed md:static bg-main dark:bg-main-dark navbar w-full">
@@ -45,13 +56,16 @@ const App = () => {
                         <div>
                             {themeSettings && <ThemeSettings />}
                             <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/home" element={<Home />} />
-                                <Route path="/todo" element={<Todo />} />
-                                <Route
-                                    path="/calendar"
-                                    element={<Calendar />}
-                                />
+                                <Route element={<PrivateComponent />}>
+                                    <Route path="/home" element={<Home />} />
+                                    <Route path="/todo" element={<Todo />} />
+                                    <Route
+                                        path="/calendar"
+                                        element={<Calendar />}
+                                    />
+                                </Route>
+
+                                <Route path="/" element={<Login />} />
                             </Routes>
                         </div>
                     </div>

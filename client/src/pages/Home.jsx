@@ -44,7 +44,7 @@ const Home = () => {
 
     return (
         <div className="flex justify-between p-4 gap-4 font-display">
-            <div className="flex border-2 border-black dark:border-white bg-white dark:bg-secondary-dark h-[82vh] w-2/3 rounded-lg drop-shadow-xl scroll">
+            <div className="flex border-2 border-black dark:border-white bg-white dark:bg-secondary-dark h-[82vh] w-2/3 rounded-lg drop-shadow-xl">
                 Profile
             </div>
             <div className="flex-row border-2 border-black dark:border-white bg-white dark:bg-secondary-dark h-[82vh] w-1/3 rounded-lg drop-shadow-xl overflow-y-auto">
