@@ -23,6 +23,14 @@ const Navbar = () => {
         currentColor,
     } = useStateContext();
 
+    const auth = localStorage.getItem('user_data');
+    console.log(auth);
+    
+    function getUserInitials() {
+        if (!auth) return "?";
+        return "IC";
+    }
+    
     const activeLink = "flex items-center px-3 rounded-lg text-white text-md";
     const normalLink = "flex items-center px-3 rounded-lg text-white text-md hover:bg-light-gray/50 hover:rounded-lg";
 
@@ -77,7 +85,7 @@ const Navbar = () => {
 
     return (
         <div className="flex justify-between p-2 relative bg-secondary dark:bg-secondary-dark drop-shadow-lg font-display">
-            <div className="flex">   
+            <div className="flex w-[275px]">
                 <Link
                     to="/"
                     className="items-center ml-2 flex text-2xl font-extrabold text-white">
@@ -85,28 +93,30 @@ const Navbar = () => {
                     <span className="pl-2"> KALVIN </span>
                 </Link>
             </div>
-            <div className="flex">
-                <NavButtonText
-                    title="home"
-                    customFunc={() => {}}
-                    color={currentColor}
-                />
+            <div className="flex w-full justify-evenly">
+                <div className="flex">
+                    <NavButtonText
+                        title="home"
+                        customFunc={() => {}}
+                        color={currentColor}
+                    />
+                </div>
+                <div className="flex">
+                    <NavButtonText
+                        title="todo"
+                        customFunc={() => {}}
+                        color={currentColor}
+                    />
+                </div>
+                <div className="flex">
+                    <NavButtonText
+                        title="calendar"
+                        customFunc={() => {}}
+                        color={currentColor}
+                    />
+                </div>
             </div>
-            <div className="flex">
-                <NavButtonText
-                    title="todo"
-                    customFunc={() => {}}
-                    color={currentColor}
-                />
-            </div>
-            <div className="flex">
-                <NavButtonText
-                    title="calendar"
-                    customFunc={() => {}}
-                    color={currentColor}
-                />
-            </div>
-            <div className="flex">
+            <div className="flex w-[275px] justify-end">
                 <NavButtonIcon
                     title="Add"
                     customFunc={() => handleClick("add")}
@@ -124,16 +134,12 @@ const Navbar = () => {
                     <div
                         className="flex items-center gap-2 cursor-pointer p-1 px-2 hover:bg-light-gray/60 rounded-lg"
                         onClick={() => handleClick("userProfile")}>
-                        <img className="rounded-full w-8 h-8" src={avatar} />
-                        <p>
-                            <span className="text-gray-400 text-14 font-display">
-                                Hi,
-                            </span>{" "}
-                            <span className="text-gray-400 font-bold font-display ml-1 text-14">
-                                Iain
+                        <div className="flex-none flex justify-center items-center rounded-full h-9 w-9" style={{backgroundColor: currentColor}}>
+                            <span className="text-gray-400 font-bold font-display text-lg">
+                                {getUserInitials()}
                             </span>
-                        </p>
-                        <MdKeyboardArrowDown className="text-gray-400 text-14" />
+                        </div>
+                        <MdKeyboardArrowDown className="-ml-1 text-gray-400 text-lg" />
                     </div>
                 </TooltipComponent>
 

@@ -11,13 +11,15 @@ const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        res.status(400).send("Email/Password Field(s) Empty");
+        res.status(400);
+        throw new Error('Empty Email/Password Field(s)');
     }
 
     const user = await Users.findOne({ email });
 
     if (!user) {
-        res.status(401).send("Invalid Email/Password");
+        res.status(401);
+        throw new Error("Invalid Email/Password");
     }
 
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -32,7 +34,8 @@ const login = asyncHandler(async (req, res) => {
             },
         });
     } else {
-        res.status(401).send("Invalid Email/Password");
+        res.status(401);
+        throw new Error('Invalid Email/Password');
     }
 });
 

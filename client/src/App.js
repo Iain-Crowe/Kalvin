@@ -4,7 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components/index";
-import { Home, Calendar, Todo, Login } from "./pages/index";
+import { Home, Calendar, Todo, Login, Register } from "./pages/index";
 
 import { useStateContext } from "./contexts/ContextProvider";
 
@@ -19,6 +19,8 @@ const App = () => {
         currentColor,
         currentMode,
     } = useStateContext();
+
+    const auth = localStorage.getItem('user_data');
 
     return (
         <div
@@ -46,10 +48,7 @@ const App = () => {
                         </TooltipComponent>
                     </div>
                     <div
-                        className={`dark:bg-main-dark bg-main min-h-screen w-full ${
-                            ""
-                            /*activeMenu ? "md:ml-72" : "flex-2"*/
-                        }`}>
+                        className={`dark:bg-main-dark bg-main min-h-screen w-full`}>
                         <div className="fixed md:static bg-main dark:bg-main-dark navbar w-full">
                             <Navbar />
                         </div>
@@ -65,7 +64,24 @@ const App = () => {
                                     />
                                 </Route>
 
-                                <Route path="/" element={<Login />} />
+                                <Route path="/" element={(!auth) ? <Login /> : <Home />} />
+                                <Route
+                                    path="/register"
+                                    element={<Register />}
+                                />
+                                <Route
+                                    path="*"
+                                    element={
+                                        <div className="flex-row text-center mt-32">
+                                            <h1 className="text-3xl text-black dark:text-white">
+                                                404 Error
+                                            </h1>
+                                            <h2 className="text-black dark:text-white">
+                                                Page not Found
+                                            </h2>
+                                        </div>
+                                    }
+                                />
                             </Routes>
                         </div>
                     </div>
