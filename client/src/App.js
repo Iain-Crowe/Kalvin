@@ -20,7 +20,7 @@ const App = () => {
         currentMode,
     } = useStateContext();
 
-    const auth = localStorage.getItem('user_data');
+    const auth = localStorage.getItem("user_data");
 
     return (
         <div
@@ -63,8 +63,7 @@ const App = () => {
                                         element={<Calendar />}
                                     />
                                 </Route>
-
-                                <Route path="/" element={(!auth) ? <Login /> : <Home />} />
+                                <Route path="/" element={<Login />} />
                                 <Route
                                     path="/register"
                                     element={<Register />}

@@ -6,7 +6,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { basePath } from "../contexts/BuildPath";
 
 const Login = () => {
-    const { currentColor } = useStateContext();
+    const { currentColor, setAuth } = useStateContext();
     const navigate = useNavigate();
 
     const emailRef = useRef();
@@ -29,6 +29,7 @@ const Login = () => {
                     const user = JSON.stringify(res.data);
                     localStorage.setItem("user_data", user);
                     localStorage.setItem("token_data", res.data.user.token);
+                    setAuth(true);
                     navigate("/home");
                 }
             })

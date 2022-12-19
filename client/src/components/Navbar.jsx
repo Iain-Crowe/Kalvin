@@ -21,14 +21,17 @@ const Navbar = () => {
         screenSize,
         setScreenSize,
         currentColor,
+        auth
     } = useStateContext();
-
-    const auth = localStorage.getItem('user_data');
-    console.log(auth);
     
     function getUserInitials() {
         if (!auth) return "?";
-        return "IC";
+        const ud = localStorage.getItem("user_data");
+        console.log(ud);
+        var json = JSON.parse(ud);
+        var fi = json.user.firstName.charAt(0);
+        var li = json.user.lastName.charAt(0);
+        return "" + fi + li;
     }
     
     const activeLink = "flex items-center px-3 rounded-lg text-white text-md";
@@ -87,7 +90,7 @@ const Navbar = () => {
         <div className="flex justify-between p-2 relative bg-secondary dark:bg-secondary-dark drop-shadow-lg font-display">
             <div className="flex w-[275px]">
                 <Link
-                    to="/"
+                    to={auth ? "/home" : "/"}
                     className="items-center ml-2 flex text-2xl font-extrabold text-white">
                     <img className="h-8" src={icon} />
                     <span className="pl-2"> KALVIN </span>
@@ -117,19 +120,19 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex w-[275px] justify-end">
-                <NavButtonIcon
+                {auth && <NavButtonIcon
                     title="Add"
                     customFunc={() => handleClick("add")}
                     color={currentColor}
                     icon={<AiOutlinePlusCircle />}
-                />
-                <NavButtonIcon
+                />}
+                {auth && <NavButtonIcon
                     title="Notifications"
                     customFunc={() => handleClick("notification")}
                     dotColor="red"
                     color={currentColor}
                     icon={<RiNotification3Line />}
-                />
+                />}
                 <TooltipComponent content="Profile" position="BottomCenter">
                     <div
                         className="flex items-center gap-2 cursor-pointer p-1 px-2 hover:bg-light-gray/60 rounded-lg"

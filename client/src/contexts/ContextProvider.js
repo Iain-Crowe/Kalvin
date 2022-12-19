@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 const StateContext = createContext();
 
 const initialState = {
+    add: false,
     userProfile: false,
     notification: false,
 };
@@ -14,6 +15,7 @@ export const ContextProvider = ({ children }) => {
     const [currentColor, setCurrentColor] = useState("#871C2A");
     const [currentMode, setCurrentMode] = useState('Dark');
     const [themeSettings, setThemeSettings] = useState(false);
+    const [auth, setAuth] = useState(false);
 
     const setMode = (e) => {
         setCurrentMode(e.target.value);
@@ -51,6 +53,8 @@ export const ContextProvider = ({ children }) => {
                 setThemeSettings,
                 setColor,
                 setMode,
+                auth,
+                setAuth
             }}>
             {children}
         </StateContext.Provider>
