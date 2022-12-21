@@ -3,7 +3,7 @@ module.exports = {
     darkMode: "class",
     theme: {
         fontFamily: {
-            display: ["Liberation Mono"],
+            display: ["Liberation Mono", "courier"],
             body: ["monospace"],
         },
         extend: {
