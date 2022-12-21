@@ -48,31 +48,31 @@ const Login = () => {
         <div className="flex place-items-center justify-center mt-32">
             <form
                 onSubmit={doLogin}
-                className="flex-row justify-center border-2 border-black dark:border-white bg-white dark:bg-secondary-dark h-[450px] w-[400px] rounded-lg drop-shadow-xl p-4">
+                className="flex-row justify-center border-2 border-gray-600 dark:border-gray-500 bg-white dark:bg-secondary-dark h-[450px] w-[400px] rounded-lg drop-shadow-xl p-4">
                 <div className="flex-row text-center mt-4">
-                    <h2 className="text-black dark:text-white text-xl font-bold">
+                    <h2 className="text-gray-800 dark:text-gray-300 text-xl font-bold">
                         Welcome to Kalvin!
                     </h2>
-                    <p className="text-gray-700 dark:text-gray-400 text-md font-semibold">
+                    <p className="text-gray-600 dark:text-gray-500 text-md font-semibold">
                         Please login:
                     </p>
-                    <p className="text-red-600 text-md mt-2">{message}</p>
+                    <p className="text-red-600 text-md font-semibold dark:font-normal mt-2">{message}</p>
                 </div>
                 <div className="mt-4">
-                    <label className="block dark:text-white my-4 px-4 w-full">
+                    <label className="block dark:text-gray-300 my-4 px-4 w-full">
                         Email:
                         <input
-                            className="px-2 py-1 border-b-2 border-black dark:border-white bg-transparent w-full focus:outline-none focus:bg-gray-500/25 rounded-t-sm"
+                            className="px-2 py-1 border-b-2 border-gray-600 dark:border-gray-500 bg-transparent w-full focus:outline-none focus:bg-gray-500/25 rounded-t-sm"
                             type="text"
                             placeholder="> Email"
                             ref={emailRef}
                             id="email"
                         />
                     </label>
-                    <label className="block dark:text-white my-4 px-4 w-full">
+                    <label className="block dark:text-gray-300 my-4 px-4 w-full">
                         Password:
                         <input
-                            className="px-2 py-1 border-b-2 border-black dark:border-white bg-transparent w-full focus:outline-none focus:bg-gray-500/25 rounded-t-sm"
+                            className="px-2 py-1 border-b-2 border-gray-600 dark:border-gray-500 bg-transparent w-full focus:outline-none focus:bg-gray-500/25 rounded-t-sm"
                             type="password"
                             placeholder="> Password"
                             ref={passwordRef}
@@ -83,7 +83,7 @@ const Login = () => {
                 <div className="flex justify-center">
                     <input
                         type="submit"
-                        className="block text-white px-2 py-2 rounded-md w-full mx-4 mt-2 outline outline-0 outline-offset-2 hover:outline-2"
+                        className="block text-white px-2 py-2 rounded-md w-full mx-4 mt-2 outline outline-0 outline-offset-2 hover:outline-2 cursor-pointer"
                         style={{
                             backgroundColor: currentColor,
                             outlineColor: currentColor,
@@ -92,7 +92,7 @@ const Login = () => {
                         value='Login'/>
                 </div>
                 <div className="flex justify-center mt-4">
-                    <span className="text-black dark:text-white truncate">
+                    <span className="text-black dark:text-gray-300 truncate">
                         Don't have an account?
                     </span>
                     <Link

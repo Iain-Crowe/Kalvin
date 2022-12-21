@@ -35,7 +35,7 @@ const Navbar = () => {
     }
     
     const activeLink = "flex items-center px-3 rounded-lg text-white text-md";
-    const normalLink = "flex items-center px-3 rounded-lg text-white text-md hover:bg-light-gray/50 hover:rounded-lg";
+    const normalLink = "flex items-center px-3 rounded-lg text-white text-md hover:bg-gray-400/50 hover:rounded-lg";
 
     const NavButtonText = ({ title, customFunc }) => (
         <NavLink
@@ -58,7 +58,7 @@ const Navbar = () => {
                 type="button"
                 onClick={customFunc}
                 style={{ color }}
-                className="relative text-xl rounded-full p-3 hover:bg-light-gray/60">
+                className="relative text-xl rounded-full p-3 hover:bg-gray-400/50">
                 <span
                     style={{ background: dotColor }}
                     className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
@@ -120,24 +120,30 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex w-[275px] justify-end">
-                {auth && <NavButtonIcon
-                    title="Add"
-                    customFunc={() => handleClick("add")}
-                    color={currentColor}
-                    icon={<AiOutlinePlusCircle />}
-                />}
-                {auth && <NavButtonIcon
-                    title="Notifications"
-                    customFunc={() => handleClick("notification")}
-                    dotColor="red"
-                    color={currentColor}
-                    icon={<RiNotification3Line />}
-                />}
+                {auth && (
+                    <NavButtonIcon
+                        title="Add"
+                        customFunc={() => handleClick("add")}
+                        color={currentColor}
+                        icon={<AiOutlinePlusCircle />}
+                    />
+                )}
+                {auth && (
+                    <NavButtonIcon
+                        title="Notifications"
+                        customFunc={() => handleClick("notification")}
+                        dotColor="red"
+                        color={currentColor}
+                        icon={<RiNotification3Line />}
+                    />
+                )}
                 <TooltipComponent content="Profile" position="BottomCenter">
                     <div
-                        className="flex items-center gap-2 cursor-pointer p-1 px-2 hover:bg-light-gray/60 rounded-lg"
+                        className="flex items-center gap-2 cursor-pointer p-1 px-2 hover:bg-gray-400/50 rounded-lg"
                         onClick={() => handleClick("userProfile")}>
-                        <div className="flex-none flex justify-center items-center rounded-full h-9 w-9" style={{backgroundColor: currentColor}}>
+                        <div
+                            className="flex-none flex justify-center items-center rounded-full h-9 w-9"
+                            style={{ backgroundColor: currentColor }}>
                             <span className="text-gray-400 font-bold font-display text-lg">
                                 {getUserInitials()}
                             </span>

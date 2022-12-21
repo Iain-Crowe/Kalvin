@@ -45,11 +45,13 @@ const register = asyncHandler(async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     if (!firstName || !lastName || !email || !password) {
-        res.status(400).send("Required Field(s) Empty");
+        res.status(400)
+        throw new Error("Required Field(s) Empty");
     }
 
     if (await Users.findOne({ email })) {
-        res.status(400).send("Email is already in use");
+        res.status(400)
+        throw new Error('Email already in use');
     }
 
     const salt = await bcrypt.genSalt(12);
@@ -75,7 +77,8 @@ const register = asyncHandler(async (req, res) => {
             },
         });
     } else {
-        res.status(400).send("Registration failed, try again");
+        res.status(400)
+        throw new Error('Unknown Error Occured')
     }
 });
 
