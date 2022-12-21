@@ -7,3 +7,4 @@ export { default as Notification } from './Notification';
 export { default as ThemeSettings } from './ThemeSettings';
 export { default as TodoHeader } from './TodoHeader';
 export { default as UserProfile } from './UserProfile';
+export { default as Menu } from './Menu';

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { AiOutlineMenu, AiOutlinePlusCircle } from "react-icons/ai";
 import { RiNotification3Line } from "react-icons/ri";
@@ -6,24 +6,23 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import icon from "../data/icon-owl.png";
-import avatar from "../data/avatar.jpg";
 import { Add, Notification, UserProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const {
-        activeMenu,
-        setActiveMenu,
+        smallNav,
+        setSmallNav,
         isClicked,
         setIsClicked,
         handleClick,
         screenSize,
         setScreenSize,
         currentColor,
-        auth
+        auth,
     } = useStateContext();
-    
+
     function getUserInitials() {
         if (!auth) return "?";
         const ud = localStorage.getItem("user_data");
@@ -33,9 +32,10 @@ const Navbar = () => {
         var li = json.user.lastName.charAt(0);
         return "" + fi + li;
     }
-    
+
     const activeLink = "flex items-center px-3 rounded-lg text-white text-md";
-    const normalLink = "flex items-center px-3 rounded-lg text-white text-md hover:bg-gray-400/50 hover:rounded-lg";
+    const normalLink =
+        "flex items-center px-3 rounded-lg text-white text-md hover:bg-gray-400/50 hover:rounded-lg";
 
     const NavButtonText = ({ title, customFunc }) => (
         <NavLink
@@ -80,83 +80,123 @@ const Navbar = () => {
 
     useEffect(() => {
         if (screenSize <= 900) {
-            setActiveMenu(false);
+            setSmallNav(true);
         } else {
-            setActiveMenu(true);
+            setSmallNav(false);
         }
     }, [screenSize]);
 
-    return (
-        <div className="flex justify-between p-2 relative bg-secondary dark:bg-secondary-dark drop-shadow-lg font-display">
-            <div className="flex w-[275px]">
-                <Link
-                    to={auth ? "/home" : "/"}
-                    className="items-center ml-2 flex text-2xl font-extrabold text-white">
-                    <img className="h-8" src={icon} />
-                    <span className="pl-2"> KALVIN </span>
-                </Link>
-            </div>
-            <div className="flex w-full justify-evenly">
-                <div className="flex">
-                    <NavButtonText
-                        title="home"
-                        customFunc={() => {}}
-                        color={currentColor}
-                    />
-                </div>
-                <div className="flex">
-                    <NavButtonText
-                        title="todo"
-                        customFunc={() => {}}
-                        color={currentColor}
-                    />
-                </div>
-                <div className="flex">
-                    <NavButtonText
-                        title="calendar"
-                        customFunc={() => {}}
-                        color={currentColor}
-                    />
-                </div>
-            </div>
-            <div className="flex w-[275px] justify-end">
-                {auth && (
-                    <NavButtonIcon
-                        title="Add"
-                        customFunc={() => handleClick("add")}
-                        color={currentColor}
-                        icon={<AiOutlinePlusCircle />}
-                    />
-                )}
-                {auth && (
-                    <NavButtonIcon
-                        title="Notifications"
-                        customFunc={() => handleClick("notification")}
-                        dotColor="red"
-                        color={currentColor}
-                        icon={<RiNotification3Line />}
-                    />
-                )}
-                <TooltipComponent content="Profile" position="BottomCenter">
-                    <div
-                        className="flex items-center gap-2 cursor-pointer p-1 px-2 hover:bg-gray-400/50 rounded-lg"
-                        onClick={() => handleClick("userProfile")}>
-                        <div
-                            className="flex-none flex justify-center items-center rounded-full h-9 w-9"
-                            style={{ backgroundColor: currentColor }}>
-                            <span className="text-gray-400 font-bold font-display text-lg">
-                                {getUserInitials()}
-                            </span>
-                        </div>
-                        <MdKeyboardArrowDown className="-ml-1 text-gray-400 text-lg" />
-                    </div>
-                </TooltipComponent>
+    const [activeMenu, setActiveMenu] = useState(false);
 
-                {isClicked.add && <Add />}
-                {isClicked.notification && <Notification />}
-                {isClicked.userProfile && <UserProfile />}
-            </div>
-        </div>
+    return (
+        <>
+            {smallNav ? (
+                <div className="flex justify-between p-2 relative bg-secondary dark:bg-secondary-dark drop-shadow-lg font-display">
+                    <TooltipComponent content="Menu" position="BottomCenter">
+                        <div
+                            onClick={() => {setActiveMenu(true); console.log(activeMenu)}}
+                            className="flex cursor-pointer items-center p-2 hover:bg-gray-400/50 rounded-lg mt-1">
+                            <AiOutlineMenu className="text-gray-400 text-lg" />
+                        </div>
+                    </TooltipComponent>
+                    <div className="flex justify-center w-[275px]">
+                        <Link
+                            to={auth ? "/home" : "/"}
+                            className="items-center ml-2 flex text-2xl font-extrabold text-white">
+                            <img className="h-8" src={icon} />
+                            <span className="pl-2"> KALVIN </span>
+                        </Link>
+                    </div>
+                    <TooltipComponent content="Profile" position="BottomCenter">
+                        <div
+                            className="flex items-center gap-2 cursor-pointer p-1 px-2 hover:bg-gray-400/50 rounded-lg"
+                            onClick={() => handleClick("userProfile")}>
+                            <div
+                                className="flex-none flex justify-center items-center rounded-full h-9 w-9"
+                                style={{ backgroundColor: currentColor }}>
+                                <span className="text-gray-400 font-bold font-display text-lg">
+                                    {getUserInitials()}
+                                </span>
+                            </div>
+                            <MdKeyboardArrowDown className="-ml-1 text-gray-400 text-lg" />
+                        </div>
+                    </TooltipComponent>
+                </div>
+            ) : (
+                <div className="flex justify-between p-2 relative bg-secondary dark:bg-secondary-dark drop-shadow-lg font-display">
+                    <div className="flex w-[275px]">
+                        <Link
+                            to={auth ? "/home" : "/"}
+                            className="items-center ml-2 flex text-2xl font-extrabold text-white">
+                            <img className="h-8" src={icon} />
+                            <span className="pl-2"> KALVIN </span>
+                        </Link>
+                    </div>
+                    <div className="flex w-full justify-evenly">
+                        <div className="flex">
+                            <NavButtonText
+                                title="home"
+                                customFunc={() => {}}
+                                color={currentColor}
+                            />
+                        </div>
+                        <div className="flex">
+                            <NavButtonText
+                                title="todo"
+                                customFunc={() => {}}
+                                color={currentColor}
+                            />
+                        </div>
+                        <div className="flex">
+                            <NavButtonText
+                                title="calendar"
+                                customFunc={() => {}}
+                                color={currentColor}
+                            />
+                        </div>
+                    </div>
+                    <div className="flex w-[275px] justify-end">
+                        {auth && (
+                            <NavButtonIcon
+                                title="Add"
+                                customFunc={() => handleClick("add")}
+                                color={currentColor}
+                                icon={<AiOutlinePlusCircle />}
+                            />
+                        )}
+                        {auth && (
+                            <NavButtonIcon
+                                title="Notifications"
+                                customFunc={() => handleClick("notification")}
+                                dotColor="red"
+                                color={currentColor}
+                                icon={<RiNotification3Line />}
+                            />
+                        )}
+                        <TooltipComponent
+                            content="Profile"
+                            position="BottomCenter">
+                            <div
+                                className="flex items-center gap-2 cursor-pointer p-1 px-2 hover:bg-gray-400/50 rounded-lg"
+                                onClick={() => handleClick("userProfile")}>
+                                <div
+                                    className="flex-none flex justify-center items-center rounded-full h-9 w-9"
+                                    style={{ backgroundColor: currentColor }}>
+                                    <span className="text-gray-400 font-bold font-display text-lg">
+                                        {getUserInitials()}
+                                    </span>
+                                </div>
+                                <MdKeyboardArrowDown className="-ml-1 text-gray-400 text-lg" />
+                            </div>
+                        </TooltipComponent>
+
+                        {isClicked.add && <Add />}
+                        {isClicked.notification && <Notification />}
+                        {isClicked.userProfile && <UserProfile />}
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-import { Navbar, Footer, Sidebar, ThemeSettings } from "./components/index";
+import { Navbar, Footer, ThemeSettings, Menu } from "./components/index";
 import { Home, Calendar, Todo, Login, Register } from "./pages/index";
 
 import { useStateContext } from "./contexts/ContextProvider";
@@ -47,6 +47,15 @@ const App = () => {
                             </button>
                         </TooltipComponent>
                     </div>
+                    {activeMenu ? (
+                        <div className="w-72 fixed menu bg-main dark:bg-main-dark">
+                            <Menu />
+                        </div>
+                    ) : (
+                        <div className="w-0 dark:bg-main-dark">
+                            <Menu />
+                        </div>
+                    )}
                     <div
                         className={`dark:bg-main-dark bg-main min-h-screen w-full`}>
                         <div className="fixed md:static bg-main dark:bg-main-dark navbar w-full">
