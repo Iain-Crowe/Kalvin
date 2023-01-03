@@ -33,6 +33,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/user', require('./routes/userRoutes'));
+app.use('/api/todo', require('./routes/todoRoutes'));
 
 // Deployment
 if (process.env.NODE_ENV === "production") {

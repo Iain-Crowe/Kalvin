@@ -19,12 +19,6 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    },
-    userData: {
-        type: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'UserData'
-        }
     }
 });
 
