@@ -126,7 +126,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the GLP-2.0 License.
 
 ## Acknowledgements
 
