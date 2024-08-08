@@ -1,0 +1,7 @@
+Flask
+Flask-JWT-Extended
+Flask-Migrate
+Flask-SQLAlchemy
+pytest
+pytest-flask
+python-dotenv
